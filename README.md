@@ -95,86 +95,13 @@ neatpdf/
 └── package.json          # Dependencies and scripts
 ```
 
-## 🚢 Deployment
-
-NeatPDF can be deployed to any static hosting service:
-
-### Vercel (Recommended)
-```bash
-npm i -g vercel
-vercel
-```
-
-### Netlify
-```bash
-npm run build
-# Drag and drop the 'dist' folder to netlify.com/drop
-```
-
-### GitHub Pages
-```bash
-npm install --save-dev gh-pages
-
-# Add to package.json scripts:
-"predeploy": "npm run build",
-"deploy": "gh-pages -d dist"
-
-# Deploy
-npm run deploy
-```
-
-## 🔧 Configuration
-
-### Vite Configuration
-The project uses `vite-plugin-static-copy` to copy the PDF.js worker file:
-
-```js
-viteStaticCopy({
-  targets: [{
-    src: path.resolve(__dirname, 'node_modules/pdfjs-dist/build/pdf.worker.min.mjs'),
-    dest: '',
-    rename: 'pdf.worker.min.js'
-  }]
-})
-```
-
-### PDF.js Setup
-The worker is configured in `App.jsx`:
-```js
-pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.js';
-```
-
-## 🐛 Known Issues & Solutions
-
-### ArrayBuffer Detachment
-When processing PDFs, always re-read the file's ArrayBuffer fresh:
-```js
-const freshArrayBuffer = await pdfFile.file.arrayBuffer();
-const pdf = await PDFDocument.load(freshArrayBuffer);
-```
-
-### Large Bundle Size
-The main bundle is ~1.1MB due to PDF processing libraries. Consider:
-- Dynamic imports for code splitting
-- Manual chunking with Rollup options
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
 ## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 💖 Acknowledgments
 
-- Made with ❤️ by [Aarush](https://github.com/yourusername)
+- Made with ❤️ by [Aarush](https://github.com/aarush-verulkar-usc)
 - Animated background inspired by [ReactBits Threads](https://reactbits.dev)
 - Icons by [Heroicons](https://heroicons.com)
 - Font: [Figtree](https://fonts.google.com/specimen/Figtree) by Google Fonts
